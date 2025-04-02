@@ -13,9 +13,9 @@ A responsive web application for browsing and purchasing products, built with:
 - Shopping cart functionality
 - Responsive design
 
+If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
-## Installation
 
-1. Clone this repository
-2. Run `npm install`
-3. Run `npm start` to launch the development server
+# install all necessary pacakges using npm install
+# run the below command to start the application
+# npm run dev
