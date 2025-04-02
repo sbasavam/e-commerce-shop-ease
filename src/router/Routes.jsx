@@ -6,6 +6,9 @@ import About from "../pages/About"
 import ContactPage from "../pages/ContactPage"
 import NotificationPage from "../pages/NotificationPage"
 import Terms from "../pages/TermsPage"
+import CartPage from "../pages/CartPage"
+import CheckoutPage from "../pages/CheckoutPage"
+import SettingsPage from "../pages/SettingsPage"
 import Layout from "../components/Layout/Layout";
 
 const AppRoutes = () => {
@@ -19,6 +22,10 @@ const AppRoutes = () => {
          <Route path="/contact" element={<ContactPage />} />
          <Route path="/notifications" element={<NotificationPage />} />
          <Route path="/terms" element={<Terms />} />
+         <Route path="/cart" element={<CartPage />} />
+         <Route path="/settings" element={<SettingsPage />} />
+         <Route path="/checkout" element={<CheckoutPage />} />
+         
       </Route>
     </Routes>
   );

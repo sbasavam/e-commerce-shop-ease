@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../features/cart/cartSlice';
 import "../styles/App.css";
+import "../styles/ProductDetail.css";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     getProductDetail();
@@ -21,11 +27,18 @@ const ProductDetail = () => {
       const response = await fetch(`https://dummyjson.com/products/${id}`);
       const productData = await response.json();
       setProduct(productData);
+      setSelectedImage(productData.thumbnail);
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 3000);
   };
 
   if (loading) return (
@@ -52,10 +65,16 @@ const ProductDetail = () => {
         &larr; Back to Products
       </button>
       
+      {showSuccess && (
+        <div className="success-message">
+          {product.title} added to cart successfully!
+        </div>
+      )}
+      
       <div className="product-main">
         <div className="product-gallery">
           <div className="main-image">
-            <img src={product.thumbnail} alt={product.title} />
+            <img src={selectedImage} alt={product.title} />
           </div>
           <div className="image-thumbnails">
             {product.images.map((image, index) => (
@@ -63,9 +82,8 @@ const ProductDetail = () => {
                 key={index} 
                 src={image} 
                 alt={`${product.title} ${index + 1}`}
-                onClick={() => {
-                  document.querySelector('.main-image img').src = image;
-                }}
+                onClick={() => setSelectedImage(image)}
+                className={selectedImage === image ? "active" : ""}
               />
             ))}
           </div>
@@ -113,8 +131,19 @@ const ProductDetail = () => {
           </div>
           
           <div className="action-buttons">
-            <button className="add-to-cart">Add to Cart</button>
-            <button className="buy-now">Buy Now</button>
+            <button 
+              onClick={handleAddToCart}
+              className="add-to-cart"
+              disabled={product.stock <= 0}
+            >
+              Add to Cart
+            </button>
+            <button 
+              className="buy-now"
+              disabled={product.stock <= 0}
+            >
+              Buy Now
+            </button>
           </div>
         </div>
       </div>

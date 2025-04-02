@@ -230,9 +230,7 @@ body {
   transition: var(--transition);
 }
 
-.back-button:hover {
-  color: var(--secondary-color);
-}
+
 
 .product-main {
   display: grid;
@@ -433,4 +431,10 @@ body {
   .image-thumbnails {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+.productbtn{
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
 }

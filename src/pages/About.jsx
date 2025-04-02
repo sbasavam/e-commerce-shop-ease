@@ -1,5 +1,6 @@
-import React from 'react';
-import '../styles/AboutPage.css';
+import React from "react";
+import "../styles/AboutPage.css";
+import { SiRedux } from "react-icons/si";
 
 const AboutPage = () => {
   return (
@@ -13,8 +14,10 @@ const AboutPage = () => {
           </div>
           <h1>ShopEase Demo Application</h1>
           <p className="developer-credit-container">
-  <span className="developer-credit">A Full-Stack Development Showcase by Sangana Basava M</span>
-</p>
+            <span className="developer-credit">
+              A Full-Stack Development Showcase by Sangana Basava M
+            </span>
+          </p>
         </div>
       </div>
 
@@ -22,9 +25,11 @@ const AboutPage = () => {
         <section className="mission-section">
           <h2>Project Overview</h2>
           <p>
-            This demo application showcases my capabilities in building modern, responsive web applications 
-            with elegant UI/UX design and robust backend functionality. While not a live e-commerce platform, 
-            it demonstrates the full range of skills I bring to development projects.
+            This demo application showcases my capabilities in building modern,
+            responsive web applications with elegant UI/UX design and robust
+            backend functionality. While not a live e-commerce platform, it
+            demonstrates the full range of skills I bring to development
+            projects.
           </p>
         </section>
 
@@ -51,9 +56,11 @@ const AboutPage = () => {
               <h3>Sangana Basava M</h3>
               <p className="title">Full Stack Software Engineer</p>
               <p className="bio">
-                With 2+ years of hands-on experience, I specialize in creating stunning, responsive interfaces 
-                coupled with high-performance backend systems. This demo highlights my ability to architect 
-                complete solutions from database design to pixel-perfect frontend implementation.
+                With 2+ years of hands-on experience, I specialize in creating
+                stunning, responsive interfaces coupled with high-performance
+                backend systems. This demo highlights my ability to architect
+                complete solutions from database design to pixel-perfect
+                frontend implementation.
               </p>
               <div className="developer-skills">
                 <span>Frontend Architecture</span>
@@ -62,10 +69,18 @@ const AboutPage = () => {
                 <span>Performance Optimization</span>
               </div>
               <div className="developer-links">
-                <a href="https://github.com/sbasavam" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://github.com/sbasavam"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <i className="fab fa-github"></i> GitHub
                 </a>
-                <a href="https://www.linkedin.com/in/sangana-basava-m-3029b5235/" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://www.linkedin.com/in/sangana-basava-m-3029b5235/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <i className="fab fa-linkedin"></i> LinkedIn
                 </a>
                 <a href="mailto:sanganabasavam1999@gmail.com">
@@ -102,6 +117,10 @@ const AboutPage = () => {
             </div>
             <div className="tech-item">
               <i className="fas fa-code-branch"></i> REST APIs
+            </div>
+            <div className="tech-item">
+            <i className="fas"></i>
+            <SiRedux  /> Redux
             </div>
           </div>
         </section>

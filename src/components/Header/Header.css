@@ -1,37 +1,45 @@
-/* Base Styles */
+/* Base Header Styles */
 .header {
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  background: var(--header-bg);
   color: white;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
   z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.header.light {
+  --header-bg: linear-gradient(135deg, #4f46e5, #7c3aed);
+}
+
+.header.dark {
+  --header-bg: linear-gradient(135deg, #2d3748, #1a202c);
 }
 
 .header-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 2rem;
   height: 70px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Logo Styles */
 .header-logo {
-  position: relative;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-decoration: none;
-  color: white;
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .logo-text {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .logo-highlight {
@@ -77,10 +85,6 @@
 }
 
 /* Cart Icon Specific */
-.cart-icon {
-  background: rgba(255, 255, 255, 0.1);
-}
-
 .cart-icon:hover {
   background: rgba(255, 255, 255, 0.2);
 }
@@ -100,35 +104,9 @@
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(1.2);
-    opacity: 0;
-  }
-}
-
-/* Notification Icon Specific */
-
-
-.notification-icon:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.notification-dot {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ff4757;
-  animation: pulse 1.5s infinite;
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { opacity: 0.4; }
+  100% { transform: scale(1.2); opacity: 0; }
 }
 
 /* Badge Styles */
@@ -136,7 +114,7 @@
   position: absolute;
   top: -5px;
   right: -5px;
-  background: #ff6b81;
+  background: #ef4444;
   color: white;
   font-size: 0.7rem;
   font-weight: bold;
@@ -179,6 +157,7 @@
 
 .avatar-icon {
   font-size: 1rem;
+  color: white;
 }
 
 .profile-info {
@@ -190,26 +169,35 @@
 .profile-name {
   font-weight: 500;
   font-size: 0.9rem;
+  color: white;
 }
 
 .dropdown-arrow {
   transition: transform 0.3s ease;
+  color: white;
 }
 
 .dropdown-arrow.open {
   transform: rotate(180deg);
 }
 
+/* Profile Dropdown */
 .profile-dropdown {
   position: absolute;
   right: 0;
   top: 120%;
-  width: 200px;
+  width: 220px;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   z-index: 1000;
+  transform-origin: top right;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .dropdown-content {
@@ -217,24 +205,54 @@
 }
 
 .dropdown-item {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 0.75rem 1.5rem;
   color: #4b5563;
   text-decoration: none;
   transition: all 0.2s;
+  gap: 0.75rem;
 }
 
 .dropdown-item:hover {
   background-color: #f3f4f6;
-  color: #3b82f6;
+  color: #4f46e5;
 }
 
+.dropdown-icon {
+  font-size: 1.1rem;
+}
+
+/* Theme Toggle */
+.theme-toggle-item {
+  padding: 0.5rem 1.5rem;
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  color: #4b5563;
+  width: 100%;
+  padding: 0.5rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.theme-toggle-btn:hover {
+  background-color: #f3f4f6;
+  color: #4f46e5;
+}
+
+/* Logout Button */
 .logout-container {
   padding: 0.5rem 1.5rem;
   margin-top: 0.5rem;
-  border-top: 1px solid #e5e7eb;
-  display: flex;
-  justify-content: center;
+  border-top: 1px solid #f0f0f0;
 }
 
 .logout-button {
@@ -252,15 +270,13 @@
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+  width: 100%;
+  justify-content: center;
 }
 
 .logout-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
-}
-
-.logout-button:active {
-  transform: translateY(0);
 }
 
 .logout-icon {

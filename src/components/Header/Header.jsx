@@ -1,19 +1,32 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   FiShoppingCart,
   FiUser,
   FiChevronDown,
   FiLogOut,
   FiSettings,
+  FiSun,
+  FiMoon,
+  FiHome 
 } from "react-icons/fi";
 import Notification from "../../pages/NotificationPage";
 import "./Header.css";
+import { toggleTheme } from "../../features/theme/themeSlice";
 
 const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
   const profileRef = useRef(null);
+  const dispatch = useDispatch();
+
+  // Get cart items count and current theme from Redux store
+  const cartItemsCount = useSelector((state) =>
+    state.cart.items.reduce((total, item) => total + item.quantity, 0)
+  );
+  const currentTheme = useSelector((state) => state.theme);
+
   const user = {
     name: "Sangana Basava M",
     email: "sanganabasavam1999@gmail.com",
@@ -29,22 +42,38 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleLogout = () => {
+    // Add your logout logic here
+    console.log("User logged out");
+    navigate("/");
+  };
+
+  const handleThemeToggle = () => {
+    dispatch(toggleTheme());
+  };
+
   return (
-    <header className="header">
+    <header className={`header ${currentTheme}`}>
       <div className="header-container">
-        <Link to="/" className="header-logo">
-          <span className="logo-text">ShopEase</span>
-          <span className="logo-highlight"></span>
-        </Link>
+        <span className="logo-text">ShopEase</span>
 
         <div className="header-icons">
-          {/* Cart Icon */}
+          <div
+            className="icon-container"
+            onClick={() => navigate("/")} // Retain the functionality to navigate to the home page
+          >
+            <FiHome className="icon" />
+          
+          </div>
+
           <div
             className="icon-container cart-icon"
-            onClick={() => navigate("/products-list")}
+            onClick={() => navigate("/cart")}
           >
             <FiShoppingCart className="icon" />
-            <span className="icon-badge">3</span>
+            {cartItemsCount > 0 && (
+              <span className="icon-badge">{cartItemsCount}</span>
+            )}
             <span className="icon-pulse"></span>
           </div>
 
@@ -71,15 +100,38 @@ const Header = () => {
             {isProfileOpen && (
               <div className="profile-dropdown">
                 <div className="dropdown-content">
-                  <Link to="/profile" className="dropdown-item">
-                    Profile
-                  </Link>
-                  <Link to="/settings" className="dropdown-item">
+                
+
+                  <Link
+                    to="/settings"
+                    className="dropdown-item"
+                    onClick={() => setIsProfileOpen(false)}
+                  >
+                    <FiSettings className="dropdown-icon" />
                     Settings
                   </Link>
 
+                  <div className="theme-toggle-item">
+                    <button
+                      className="theme-toggle-btn"
+                      onClick={handleThemeToggle}
+                    >
+                      {currentTheme === "light" ? (
+                        <>
+                          <FiMoon className="dropdown-icon" />
+                          Dark Mode
+                        </>
+                      ) : (
+                        <>
+                          <FiSun className="dropdown-icon" />
+                          Light Mode
+                        </>
+                      )}
+                    </button>
+                  </div>
+
                   <div className="logout-container">
-                    <button className="logout-button">
+                    <button className="logout-button" onClick={handleLogout}>
                       <FiLogOut className="logout-icon" />
                       <span>Logout</span>
                       <div className="logout-effect"></div>

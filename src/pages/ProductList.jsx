@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+// import { useDispatch } from 'react-redux';
+// import { addToCart } from '../features/cart/cartSlice';
 import "../styles/App.css";
 
 const ProductList = () => {
@@ -8,6 +10,8 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
+  // const dispatch = useDispatch();
+  // const [product, setProduct] = useState(null);
 
   // Get category from URL query parameter
   const queryParams = new URLSearchParams(location.search);
@@ -47,6 +51,13 @@ const ProductList = () => {
   const handleProductClick = (productId) => {
     navigate(`/products/${productId}`);
   };
+
+
+  // const handleAddToCart = () => {
+  //   dispatch(addToCart(product));
+  //   setShowSuccess(true);
+  //   setTimeout(() => setShowSuccess(false), 3000);
+  // };
 
   function transformSentence(sentence) {
     if (!sentence || typeof sentence !== 'string') return '';
@@ -152,9 +163,16 @@ const ProductList = () => {
                   ))}
                   <span>({product.rating})</span>
                 </div>
-                <button className="view-details-button">
+               <div className="productbtn">
+               <button className="view-details-button">
                   View Details
                 </button>
+                {/* <button 
+                onClick={handleAddToCart}
+                className="view-details-button">
+                 Add Cart
+                </button> */}
+               </div>
               </div>
             </div>
           ))}
