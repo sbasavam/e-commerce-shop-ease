@@ -1,8 +1,8 @@
 import React from "react";
-import "../styles/AboutPage.css";
+import "../styles/About.css";
 import { SiRedux } from "react-icons/si";
 
-const AboutPage = () => {
+const About  = () => {
   return (
     <div className="about-page">
       <div className="about-hero">
@@ -141,4 +141,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default About ;

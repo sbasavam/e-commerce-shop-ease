@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Terms.css';
 
-const TermsPage = () => {
+const Terms = () => {
   return (
     <div className="terms-page">
       <div className="terms-hero">
@@ -103,4 +103,4 @@ const TermsPage = () => {
   );
 };
 
-export default TermsPage;
+export default Terms;
